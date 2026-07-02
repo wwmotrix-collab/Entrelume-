@@ -1,0 +1,998 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#090614" />
+    <title>Entrelume — Bestseller Épico</title>
+    <style>
+      :root {
+        --bg: #090614;
+        --bg-2: #130d25;
+        --card: rgba(255, 255, 255, 0.075);
+        --card-strong: rgba(255, 255, 255, 0.12);
+        --text: #f7f1ff;
+        --muted: #b8abc9;
+        --gold: #f8ca65;
+        --violet: #9f7cff;
+        --cyan: #67e8f9;
+        --danger: #ff6b8a;
+        --ok: #79f2a6;
+        --line: rgba(255, 255, 255, 0.14);
+        --shadow: 0 24px 70px rgba(0, 0, 0, 0.35);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        color: var(--text);
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background:
+          radial-gradient(circle at top left, rgba(159, 124, 255, 0.32), transparent 32rem),
+          radial-gradient(circle at 80% 12%, rgba(103, 232, 249, 0.14), transparent 30rem),
+          linear-gradient(135deg, var(--bg), var(--bg-2) 52%, #05030a);
+      }
+
+      a {
+        color: inherit;
+      }
+
+      .app-shell {
+        width: min(1180px, calc(100% - 28px));
+        margin: 0 auto;
+        padding: 22px 0 54px;
+      }
+
+      .topbar {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 14px 0;
+        backdrop-filter: blur(18px);
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .sigil {
+        width: 44px;
+        height: 44px;
+        display: grid;
+        place-items: center;
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        background: linear-gradient(145deg, rgba(248, 202, 101, 0.22), rgba(159, 124, 255, 0.14));
+        box-shadow: var(--shadow);
+      }
+
+      .sigil::before {
+        content: "◈";
+        color: var(--gold);
+        font-size: 24px;
+      }
+
+      .brand h1 {
+        margin: 0;
+        font-size: clamp(20px, 4vw, 34px);
+        line-height: 1;
+        letter-spacing: -0.04em;
+      }
+
+      .brand small {
+        display: block;
+        margin-top: 4px;
+        color: var(--muted);
+        font-size: 12px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .tabs {
+        display: flex;
+        padding: 5px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.06);
+      }
+
+      .tab-button,
+      .pill-button,
+      .ghost-button {
+        border: 0;
+        color: var(--text);
+        cursor: pointer;
+        font-weight: 750;
+        font-family: inherit;
+      }
+
+      .tab-button {
+        padding: 10px 16px;
+        border-radius: 999px;
+        background: transparent;
+        color: var(--muted);
+      }
+
+      .tab-button.active {
+        color: #160f03;
+        background: linear-gradient(135deg, var(--gold), #fff0aa);
+      }
+
+      .hero {
+        display: grid;
+        grid-template-columns: 1.12fr 0.88fr;
+        gap: 20px;
+        align-items: stretch;
+        margin-top: 18px;
+      }
+
+      .panel,
+      .reader,
+      .card {
+        border: 1px solid var(--line);
+        border-radius: 30px;
+        background: linear-gradient(145deg, rgba(255, 255, 255, 0.105), rgba(255, 255, 255, 0.045));
+        box-shadow: var(--shadow);
+      }
+
+      .panel {
+        padding: clamp(22px, 4vw, 42px);
+        overflow: hidden;
+        position: relative;
+      }
+
+      .panel::after {
+        content: "";
+        position: absolute;
+        width: 280px;
+        height: 280px;
+        right: -120px;
+        top: -110px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(248, 202, 101, 0.28), transparent 70%);
+        pointer-events: none;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 12px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        color: var(--gold);
+        background: rgba(248, 202, 101, 0.08);
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .hero h2 {
+        margin: 20px 0 14px;
+        max-width: 720px;
+        font-size: clamp(40px, 8vw, 86px);
+        line-height: 0.93;
+        letter-spacing: -0.08em;
+      }
+
+      .hero p,
+      .muted {
+        color: var(--muted);
+        line-height: 1.75;
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 22px;
+      }
+
+      .pill-button,
+      .ghost-button {
+        padding: 13px 17px;
+        border-radius: 16px;
+      }
+
+      .pill-button {
+        color: #120d02;
+        background: linear-gradient(135deg, var(--gold), #fff1aa);
+      }
+
+      .ghost-button {
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.07);
+      }
+
+      .status-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+        margin-top: 24px;
+      }
+
+      .stat {
+        padding: 16px;
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.055);
+      }
+
+      .stat strong {
+        display: block;
+        font-size: 24px;
+      }
+
+      .stat span {
+        color: var(--muted);
+        font-size: 12px;
+      }
+
+      .cover-card {
+        display: grid;
+        min-height: 100%;
+        padding: 20px;
+      }
+
+      .book-cover {
+        position: relative;
+        min-height: 440px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding: 24px;
+        border-radius: 26px;
+        overflow: hidden;
+        background:
+          linear-gradient(160deg, rgba(248, 202, 101, 0.28), transparent 34%),
+          radial-gradient(circle at 70% 24%, rgba(103, 232, 249, 0.22), transparent 26rem),
+          linear-gradient(145deg, #17102d, #080512 64%);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+
+      .book-cover::before {
+        content: "";
+        position: absolute;
+        inset: 38px;
+        border: 1px solid rgba(248, 202, 101, 0.22);
+        border-radius: 999px 999px 90px 90px;
+      }
+
+      .book-cover::after {
+        content: "ENTRELUME";
+        position: absolute;
+        inset: auto 0 46%;
+        text-align: center;
+        color: rgba(255, 255, 255, 0.06);
+        font-size: 46px;
+        font-weight: 950;
+        letter-spacing: 0.12em;
+        transform: rotate(-8deg);
+      }
+
+      .book-cover h3,
+      .book-cover p {
+        position: relative;
+        z-index: 1;
+      }
+
+      .book-cover h3 {
+        margin: 0;
+        font-size: 38px;
+        letter-spacing: -0.05em;
+      }
+
+      .book-cover p {
+        margin: 8px 0 0;
+        color: var(--muted);
+      }
+
+      .section {
+        margin-top: 22px;
+      }
+
+      .section-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: end;
+        gap: 16px;
+        margin-bottom: 12px;
+      }
+
+      .section h2 {
+        margin: 0;
+        font-size: clamp(26px, 5vw, 48px);
+        letter-spacing: -0.06em;
+      }
+
+      .reader {
+        padding: clamp(20px, 4vw, 34px);
+      }
+
+      .chapter-list {
+        display: grid;
+        gap: 14px;
+      }
+
+      .chapter {
+        padding: 20px;
+        border: 1px solid var(--line);
+        border-radius: 22px;
+        background: rgba(255, 255, 255, 0.055);
+      }
+
+      .chapter h3 {
+        margin: 0 0 8px;
+        color: var(--gold);
+      }
+
+      .chapter p {
+        margin: 0;
+        color: #ded6ec;
+        line-height: 1.85;
+      }
+
+      .locked {
+        border-color: rgba(255, 107, 138, 0.35);
+        background: rgba(255, 107, 138, 0.08);
+      }
+
+      .unlocked {
+        border-color: rgba(121, 242, 166, 0.36);
+        background: rgba(121, 242, 166, 0.07);
+      }
+
+      .grid-2,
+      .grid-3 {
+        display: grid;
+        gap: 16px;
+      }
+
+      .grid-2 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .grid-3 {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .card {
+        padding: 20px;
+      }
+
+      .card h3 {
+        margin: 0 0 10px;
+      }
+
+      .tag {
+        display: inline-flex;
+        margin: 4px 6px 4px 0;
+        padding: 7px 10px;
+        border-radius: 999px;
+        color: var(--muted);
+        background: rgba(255, 255, 255, 0.07);
+        border: 1px solid var(--line);
+        font-size: 12px;
+        font-weight: 750;
+      }
+
+      .tag.ok {
+        color: var(--ok);
+        border-color: rgba(121, 242, 166, 0.32);
+      }
+
+      .tag.warn {
+        color: var(--gold);
+        border-color: rgba(248, 202, 101, 0.32);
+      }
+
+      .progress {
+        width: 100%;
+        height: 14px;
+        overflow: hidden;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid var(--line);
+      }
+
+      .progress span {
+        display: block;
+        height: 100%;
+        width: var(--value, 0%);
+        border-radius: inherit;
+        background: linear-gradient(90deg, var(--violet), var(--cyan), var(--gold));
+      }
+
+      .store-card {
+        display: grid;
+        grid-template-columns: 180px 1fr;
+        gap: 18px;
+        align-items: center;
+      }
+
+      .mini-cover {
+        aspect-ratio: 3 / 4;
+        border-radius: 20px;
+        border: 1px solid var(--line);
+        background:
+          radial-gradient(circle at 50% 20%, rgba(248, 202, 101, 0.35), transparent 8rem),
+          linear-gradient(150deg, #20143d, #070410);
+        display: grid;
+        place-items: center;
+        color: var(--gold);
+        font-weight: 950;
+        text-align: center;
+        padding: 12px;
+      }
+
+      input {
+        width: 100%;
+        padding: 14px 16px;
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        background: rgba(0, 0, 0, 0.18);
+        color: var(--text);
+        font: inherit;
+        outline: none;
+      }
+
+      input:focus {
+        border-color: rgba(248, 202, 101, 0.65);
+      }
+
+      .toast {
+        position: fixed;
+        right: 16px;
+        bottom: 16px;
+        z-index: 99;
+        max-width: 360px;
+        display: none;
+        padding: 14px 16px;
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        background: rgba(15, 10, 28, 0.92);
+        box-shadow: var(--shadow);
+        color: var(--text);
+      }
+
+      .toast.show {
+        display: block;
+      }
+
+      .voice-dot {
+        width: 10px;
+        height: 10px;
+        display: inline-block;
+        border-radius: 999px;
+        background: var(--muted);
+        margin-right: 6px;
+      }
+
+      .voice-dot.on {
+        background: var(--ok);
+        box-shadow: 0 0 0 5px rgba(121, 242, 166, 0.12);
+      }
+
+      [hidden] {
+        display: none !important;
+      }
+
+      @media (max-width: 860px) {
+        .topbar,
+        .section-head {
+          align-items: stretch;
+          flex-direction: column;
+        }
+
+        .tabs {
+          width: 100%;
+        }
+
+        .tab-button {
+          flex: 1;
+        }
+
+        .hero,
+        .grid-2,
+        .grid-3,
+        .store-card,
+        .status-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .book-cover {
+          min-height: 340px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar" aria-label="Topo do aplicativo Entrelume">
+        <div class="brand">
+          <div class="sigil" aria-hidden="true"></div>
+          <div>
+            <h1>Entrelume</h1>
+            <small>Bestseller Épico Reader</small>
+          </div>
+        </div>
+
+        <nav class="tabs" aria-label="Guias principais">
+          <button class="tab-button active" data-tab="leitura">Leitura</button>
+          <button class="tab-button" data-tab="lore">Lore</button>
+          <button class="tab-button" data-tab="loja">Loja</button>
+        </nav>
+      </header>
+
+      <section class="hero" id="topo">
+        <div class="panel">
+          <span class="eyebrow">◈ Primeira Lua aberta</span>
+          <h2>Leia. Desbloqueie. Colecione o lore.</h2>
+          <p>
+            Três capítulos gratuitos abrem o portal. A compra do livro libera a aba Lore,
+            cria um <strong>Reflexo de Capa</strong> NFT-ready e registra suas insígnias de leitura.
+          </p>
+          <div class="actions">
+            <button class="pill-button" data-scroll="capitulos">Ler capítulos grátis</button>
+            <button class="ghost-button" data-tab-jump="loja">Ir para Loja</button>
+            <button class="ghost-button" id="voiceButton"><span class="voice-dot" id="voiceDot"></span>Comando por voz</button>
+          </div>
+
+          <div class="status-grid">
+            <div class="stat">
+              <strong id="soldCount">127</strong>
+              <span>livros vendidos</span>
+            </div>
+            <div class="stat">
+              <strong id="badgeCount">0</strong>
+              <span>insígnias</span>
+            </div>
+            <div class="stat">
+              <strong id="loreStatus">Bloqueado</strong>
+              <span>estado do Lore</span>
+            </div>
+          </div>
+        </div>
+
+        <aside class="panel cover-card">
+          <div class="book-cover" aria-label="Capa provisória do livro Entrelume">
+            <h3>Bestseller Épico</h3>
+            <p>Livro I — Origem da Humanidade</p>
+          </div>
+        </aside>
+      </section>
+
+      <section class="section" id="tab-leitura">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Leitura inicial</span>
+            <h2 id="capitulos">3 capítulos disponíveis</h2>
+          </div>
+          <button class="ghost-button" id="markReadButton">Marcar leitura concluída</button>
+        </div>
+
+        <article class="reader">
+          <div class="chapter-list">
+            <section class="chapter">
+              <h3>Capítulo 1 — O Primeiro Diapasão</h3>
+              <p>
+                Antes da máquina tocar o céu, a civilização original já escutava o planeta como corpo vivo.
+                Suas cidades respiravam em fungos, corais e memória RNA, até que um objeto não nascido da Terra
+                atravessou o silêncio e feriu o sangue do mundo.
+              </p>
+            </section>
+            <section class="chapter">
+              <h3>Capítulo 2 — Fragmentos Mecânicos</h3>
+              <p>
+                Os primeiros drones caíram como aranhas de prata. A humanidade não os venerou: estudou, desmontou,
+                assimilou. O que era invasão tornou-se ferramenta, e o conflito entre tradição e avanço passou a ter
+                uma única resposta: defender a divindade viva também era ciência.
+              </p>
+            </section>
+            <section class="chapter">
+              <h3>Capítulo 3 — Quando Aprendemos a Máquina</h3>
+              <p>
+                A segunda onda chegou esperando encontrar organismos indefesos. Encontrou uma civilização que havia
+                aprendido a falar com metal sem abandonar o sangue da Terra. Ao final do terceiro capítulo, uma pergunta
+                fica aberta: o que a nave-mãe fará quando perceber que a força não basta?
+              </p>
+            </section>
+            <section class="chapter locked" id="chapterLocked">
+              <h3>Livro completo bloqueado</h3>
+              <p>
+                Continue no livro completo para liberar a Primeira Lua do Lore, receber seu Reflexo de Capa e abrir
+                os primeiros fragmentos do Conselho Entrelume.
+              </p>
+              <div class="actions">
+                <button class="pill-button" data-tab-jump="loja">Comprar ou ativar livro</button>
+              </div>
+            </section>
+          </div>
+        </article>
+      </section>
+
+      <section class="section" id="tab-lore" hidden>
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Guardião do Lore</span>
+            <h2>Lore desbloqueável</h2>
+          </div>
+          <span class="tag" id="loreTag">Autorização lunar pendente</span>
+        </div>
+
+        <div class="grid-2">
+          <article class="card" id="loreGateCard">
+            <h3>Portal da Primeira Lua</h3>
+            <p class="muted" id="loreGateText">
+              Escaneie ou digite o QR/código único do livro para liberar fragmentos, insígnias e portais narrativos.
+            </p>
+            <div class="actions">
+              <button class="pill-button" data-tab-jump="loja">Ativar código</button>
+            </div>
+          </article>
+
+          <article class="card">
+            <h3>Guardião responde</h3>
+            <p class="muted" id="guardianAnswer">
+              “Autorização lunar insuficiente para acessar este fragmento.”
+            </p>
+            <div class="actions">
+              <button class="ghost-button" id="askGuardianButton">Perguntar ao Guardião</button>
+            </div>
+          </article>
+        </div>
+
+        <div class="section">
+          <div class="grid-3" id="loreFragments"></div>
+        </div>
+
+        <div class="section">
+          <div class="section-head">
+            <h2>Insígnias</h2>
+            <span class="muted">Guardadas na conta do leitor</span>
+          </div>
+          <div class="grid-3" id="badgesGrid"></div>
+        </div>
+
+        <div class="section">
+          <div class="section-head">
+            <h2>Reflexo de Capa</h2>
+            <span class="muted">NFT-ready, sem exigir carteira no MVP</span>
+          </div>
+          <article class="card" id="reflectionCard">
+            <h3>Nenhum Reflexo ativo</h3>
+            <p class="muted">Compre ou ative o livro para gerar seu Reflexo de Capa interno.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="tab-loja" hidden>
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Loja Entrelume</span>
+            <h2>Livro, meta e ativação</h2>
+          </div>
+        </div>
+
+        <article class="card store-card">
+          <div class="mini-cover">BESTSELLER<br />ÉPICO<br />LIVRO I</div>
+          <div>
+            <h3>Bestseller Épico — Livro I</h3>
+            <p class="muted">
+              Compra simulada para MVP. Ao confirmar, o app gera um código único, libera Lore,
+              cria Reflexo de Capa e atualiza contador.
+            </p>
+            <div class="actions">
+              <button class="pill-button" id="buyButton">Simular compra</button>
+              <button class="ghost-button" id="copyCodeButton">Copiar código demo</button>
+            </div>
+          </div>
+        </article>
+
+        <div class="grid-2 section">
+          <article class="card">
+            <h3>Ativar QR / código único</h3>
+            <p class="muted">Use o código demo <strong>ENTRELUME-001</strong> para liberar o Lore nesta versão inicial.</p>
+            <input id="activationInput" placeholder="Digite o código do QR" autocomplete="off" />
+            <div class="actions">
+              <button class="pill-button" id="activateButton">Ativar livro</button>
+            </div>
+          </article>
+
+          <article class="card">
+            <h3>Próximo lançamento</h3>
+            <p class="muted">Meta coletiva para liberar o próximo evento narrativo.</p>
+            <div class="progress" aria-label="Barra de meta do próximo lançamento"><span id="launchProgress"></span></div>
+            <p class="muted"><strong id="launchPercent">42%</strong> da meta da Segunda Lua.</p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <script>
+      const DEMO_CODE = "ENTRELUME-001";
+      const BASE_SOLD = 127;
+      const GOAL = 300;
+
+      const defaultBadges = [
+        { id: "first-page", title: "Primeira Página", text: "Você abriu o primeiro portal de leitura." },
+        { id: "witness", title: "Testemunha do Despertar", text: "Você concluiu os três capítulos gratuitos." },
+        { id: "cover-reflection", title: "Portador do Reflexo", text: "Você ativou um Reflexo de Capa." }
+      ];
+
+      const loreFragments = [
+        { title: "Fragmento RNA", locked: true, text: "Memórias vivas preservadas em estruturas orgânicas." },
+        { title: "A Água como Sangue", locked: true, text: "Primeiro registro teológico-científico da divindade Terra." },
+        { title: "Nave Key", locked: true, text: "Sinal antigo aguardando autorização lunar." }
+      ];
+
+      const state = loadState();
+
+      function loadState() {
+        const saved = localStorage.getItem("entrelume-state");
+        if (saved) return JSON.parse(saved);
+        return {
+          activeTab: "leitura",
+          activated: false,
+          readCompleted: false,
+          soldIncrement: 0,
+          badges: ["first-page"],
+          reflection: null
+        };
+      }
+
+      function saveState() {
+        localStorage.setItem("entrelume-state", JSON.stringify(state));
+      }
+
+      function showToast(message) {
+        const toast = document.getElementById("toast");
+        toast.textContent = message;
+        toast.classList.add("show");
+        setTimeout(() => toast.classList.remove("show"), 3200);
+      }
+
+      function setTab(tabName) {
+        state.activeTab = tabName;
+        document.querySelectorAll(".tab-button").forEach((button) => {
+          button.classList.toggle("active", button.dataset.tab === tabName);
+        });
+        ["leitura", "lore", "loja"].forEach((tab) => {
+          document.getElementById(`tab-${tab}`).hidden = tab !== tabName;
+        });
+        saveState();
+      }
+
+      function addBadge(id) {
+        if (!state.badges.includes(id)) state.badges.push(id);
+      }
+
+      function generateReflection() {
+        if (state.reflection) return;
+        const serial = String(BASE_SOLD + state.soldIncrement + 1).padStart(6, "0");
+        state.reflection = {
+          id: `cover-reflection-${serial}`,
+          bookId: "bestseller-epico-livro-1",
+          edition: "Primeira Lua",
+          language: "pt-BR",
+          serialNumber: serial,
+          mintStatus: "not_minted",
+          tokenId: null,
+          contractAddress: null,
+          metadataUri: null,
+          createdAt: new Date().toISOString()
+        };
+      }
+
+      function activateBook(source = "código") {
+        if (!state.activated) {
+          state.activated = true;
+          state.soldIncrement += 1;
+          generateReflection();
+          addBadge("cover-reflection");
+          showToast(`Livro ativado por ${source}. Lore liberado e Reflexo de Capa criado.`);
+        } else {
+          showToast("Livro já está ativado nesta conta demo.");
+        }
+        saveState();
+        render();
+        setTab("lore");
+      }
+
+      function markReadCompleted() {
+        state.readCompleted = true;
+        addBadge("witness");
+        saveState();
+        render();
+        showToast("Leitura gratuita concluída. Insígnia liberada.");
+      }
+
+      function renderStats() {
+        const sold = BASE_SOLD + state.soldIncrement;
+        const percent = Math.min(100, Math.round((sold / GOAL) * 100));
+        document.getElementById("soldCount").textContent = sold;
+        document.getElementById("badgeCount").textContent = state.badges.length;
+        document.getElementById("loreStatus").textContent = state.activated ? "Liberado" : "Bloqueado";
+        document.getElementById("launchProgress").style.setProperty("--value", `${percent}%`);
+        document.getElementById("launchPercent").textContent = `${percent}%`;
+      }
+
+      function renderLore() {
+        const loreTag = document.getElementById("loreTag");
+        const loreGateCard = document.getElementById("loreGateCard");
+        const loreGateText = document.getElementById("loreGateText");
+        loreTag.textContent = state.activated ? "Primeira Lua autorizada" : "Autorização lunar pendente";
+        loreTag.className = `tag ${state.activated ? "ok" : "warn"}`;
+        loreGateCard.className = `card ${state.activated ? "unlocked" : "locked"}`;
+        loreGateText.textContent = state.activated
+          ? "A Primeira Lua foi aberta. Os primeiros fragmentos estão disponíveis conforme seu progresso de leitura."
+          : "Escaneie ou digite o QR/código único do livro para liberar fragmentos, insígnias e portais narrativos.";
+
+        const fragments = document.getElementById("loreFragments");
+        fragments.innerHTML = loreFragments
+          .map((fragment, index) => {
+            const available = state.activated && (index === 0 || state.readCompleted);
+            return `
+              <article class="card ${available ? "unlocked" : "locked"}">
+                <span class="tag ${available ? "ok" : "warn"}">${available ? "Aberto" : "Bloqueado"}</span>
+                <h3>${fragment.title}</h3>
+                <p class="muted">${available ? fragment.text : "Este eco ainda não foi despertado pela sua leitura."}</p>
+              </article>
+            `;
+          })
+          .join("");
+      }
+
+      function renderBadges() {
+        const badgesGrid = document.getElementById("badgesGrid");
+        badgesGrid.innerHTML = defaultBadges
+          .map((badge) => {
+            const earned = state.badges.includes(badge.id);
+            return `
+              <article class="card ${earned ? "unlocked" : "locked"}">
+                <span class="tag ${earned ? "ok" : "warn"}">${earned ? "Conquistada" : "Pendente"}</span>
+                <h3>${badge.title}</h3>
+                <p class="muted">${badge.text}</p>
+              </article>
+            `;
+          })
+          .join("");
+      }
+
+      function renderReflection() {
+        const card = document.getElementById("reflectionCard");
+        if (!state.reflection) {
+          card.className = "card locked";
+          card.innerHTML = `
+            <h3>Nenhum Reflexo ativo</h3>
+            <p class="muted">Compre ou ative o livro para gerar seu Reflexo de Capa interno.</p>
+          `;
+          return;
+        }
+
+        const reflection = state.reflection;
+        card.className = "card unlocked";
+        card.innerHTML = `
+          <span class="tag ok">NFT-ready</span>
+          <h3>Reflexo de Capa Nº ${reflection.serialNumber}</h3>
+          <p class="muted">Livro: ${reflection.bookId}</p>
+          <p class="muted">Edição: ${reflection.edition} • Idioma: ${reflection.language}</p>
+          <p class="muted">Status de cunhagem futura: <strong>${reflection.mintStatus}</strong></p>
+        `;
+      }
+
+      function renderGuardian() {
+        const answer = document.getElementById("guardianAnswer");
+        if (!state.activated) {
+          answer.textContent = "“Autorização lunar insuficiente para acessar este fragmento.”";
+        } else if (!state.readCompleted) {
+          answer.textContent = "“A Primeira Lua reconhece seu Reflexo. Conclua os três capítulos para despertar o próximo eco.”";
+        } else {
+          answer.textContent = "“Fragmento RNA aberto. A memória não revela tudo: ela apenas ensina onde procurar.”";
+        }
+      }
+
+      function render() {
+        renderStats();
+        renderLore();
+        renderBadges();
+        renderReflection();
+        renderGuardian();
+        document.getElementById("chapterLocked").className = `chapter ${state.activated ? "unlocked" : "locked"}`;
+      }
+
+      document.querySelectorAll(".tab-button").forEach((button) => {
+        button.addEventListener("click", () => setTab(button.dataset.tab));
+      });
+
+      document.querySelectorAll("[data-tab-jump]").forEach((button) => {
+        button.addEventListener("click", () => setTab(button.dataset.tabJump));
+      });
+
+      document.querySelectorAll("[data-scroll]").forEach((button) => {
+        button.addEventListener("click", () => document.getElementById(button.dataset.scroll).scrollIntoView());
+      });
+
+      document.getElementById("markReadButton").addEventListener("click", markReadCompleted);
+      document.getElementById("buyButton").addEventListener("click", () => activateBook("compra simulada"));
+      document.getElementById("activateButton").addEventListener("click", () => {
+        const value = document.getElementById("activationInput").value.trim().toUpperCase();
+        if (value === DEMO_CODE) activateBook("QR/código");
+        else showToast("Código inválido. Use ENTRELUME-001 nesta demo.");
+      });
+      document.getElementById("copyCodeButton").addEventListener("click", async () => {
+        await navigator.clipboard?.writeText(DEMO_CODE);
+        document.getElementById("activationInput").value = DEMO_CODE;
+        showToast("Código demo copiado para ativação.");
+      });
+      document.getElementById("askGuardianButton").addEventListener("click", () => {
+        renderGuardian();
+        showToast("Guardião consultado conforme seu nível de leitura.");
+      });
+
+      function setupVoice() {
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        const button = document.getElementById("voiceButton");
+        const dot = document.getElementById("voiceDot");
+
+        if (!SpeechRecognition) {
+          button.addEventListener("click", () => showToast("Comando por voz não suportado neste navegador."));
+          return;
+        }
+
+        const recognition = new SpeechRecognition();
+        recognition.lang = "pt-BR";
+        recognition.continuous = true;
+        recognition.interimResults = false;
+        let active = false;
+
+        recognition.addEventListener("result", (event) => {
+          const transcript = event.results[event.results.length - 1][0].transcript.toLowerCase();
+          if (transcript.includes("desce")) window.scrollBy({ top: 420, behavior: "smooth" });
+          if (transcript.includes("sobe")) window.scrollBy({ top: -420, behavior: "smooth" });
+          if (transcript.includes("loja")) setTab("loja");
+          if (transcript.includes("lore")) setTab("lore");
+          if (transcript.includes("leitura")) setTab("leitura");
+          if (transcript.includes("comprar")) setTab("loja");
+        });
+
+        recognition.addEventListener("end", () => {
+          if (active) recognition.start();
+        });
+
+        button.addEventListener("click", () => {
+          active = !active;
+          dot.classList.toggle("on", active);
+          if (active) {
+            recognition.start();
+            showToast("Comandos ativos: sobe, desce, lore, loja, leitura.");
+          } else {
+            recognition.stop();
+            showToast("Comando por voz pausado.");
+          }
+        });
+      }
+
+      setupVoice();
+      setTab(state.activeTab);
+      render();
+    </script>
+  </body>
+</html>
