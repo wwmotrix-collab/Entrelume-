@@ -39,6 +39,8 @@ module.exports = async function handler(req, res) {
   }
 
   try {
+    // getDb() inicializa o Firebase Admin antes de qualquer chamada admin.auth().
+    const db = getDb();
     const authHeader = req.headers.authorization || "";
     const idToken = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : "";
     if (!idToken) return res.status(401).json({ error: "Login obrigatório." });
@@ -53,7 +55,6 @@ module.exports = async function handler(req, res) {
       });
     }
 
-    const db = getDb();
     const userStateRef = db.collection("users").doc(uid).collection("app").doc("state");
     const logRef = db.collection("users").doc(uid).collection("guardianLogs").doc(phraseResult.logId);
     let responsePayload = null;
