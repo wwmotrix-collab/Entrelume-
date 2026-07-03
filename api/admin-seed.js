@@ -94,14 +94,8 @@ const visualEchoes = [
   }
 ];
 
-async function setIfMissing(transaction, ref, data) {
-  const snap = await transaction.get(ref);
-  if (!snap.exists) {
-    transaction.set(ref, { ...data, createdAt: serverTimestamp(), updatedAt: serverTimestamp() });
-    return "created";
-  }
-  transaction.set(ref, { ...data, updatedAt: serverTimestamp() }, { merge: true });
-  return "updated";
+function batchSet(batch, ref, data) {
+  batch.set(ref, { ...data, updatedAt: serverTimestamp() }, { merge: true });
 }
 
 module.exports = async function handler(req, res) {
@@ -113,52 +107,47 @@ module.exports = async function handler(req, res) {
   try {
     requireAdmin(req);
     const db = getDb();
+    const batch = db.batch();
     const summary = {
-      guardianStates: 0,
-      badges: 0,
-      visualEchoes: 0,
-      configs: 0
+      guardianStates: guardianStates.length,
+      badges: badges.length,
+      visualEchoes: visualEchoes.length,
+      configs: 3
     };
 
-    await db.runTransaction(async (transaction) => {
-      await setIfMissing(transaction, db.collection("counters").doc("sales"), {
-        soldCount: 0,
-        launchGoal: 300
-      });
-      summary.configs += 1;
-
-      await setIfMissing(transaction, db.collection("appConfig").doc("store"), {
-        purchaseUrl: ""
-      });
-      summary.configs += 1;
-
-      await setIfMissing(transaction, db.collection("appConfig").doc("guardian"), {
-        currentVersion: "guardian-v1",
-        displayName: "PicoClaw Guardião do Lore",
-        maskName: "Adan Éson",
-        logMechanicName: "O Nome que Responde"
-      });
-      summary.configs += 1;
-
-      for (const item of guardianStates) {
-        await setIfMissing(transaction, db.collection("guardianStates").doc(item.id), item);
-        summary.guardianStates += 1;
-      }
-
-      for (const item of badges) {
-        await setIfMissing(transaction, db.collection("badges").doc(item.id), item);
-        summary.badges += 1;
-      }
-
-      for (const item of visualEchoes) {
-        await setIfMissing(transaction, db.collection("visualEchoes").doc(item.id), item);
-        summary.visualEchoes += 1;
-      }
+    batchSet(batch, db.collection("counters").doc("sales"), {
+      soldCount: 0,
+      launchGoal: 300
     });
+
+    batchSet(batch, db.collection("appConfig").doc("store"), {
+      purchaseUrl: ""
+    });
+
+    batchSet(batch, db.collection("appConfig").doc("guardian"), {
+      currentVersion: "guardian-v1",
+      displayName: "PicoClaw Guardião do Lore",
+      maskName: "Adan Éson",
+      logMechanicName: "O Nome que Responde"
+    });
+
+    for (const item of guardianStates) {
+      batchSet(batch, db.collection("guardianStates").doc(item.id), item);
+    }
+
+    for (const item of badges) {
+      batchSet(batch, db.collection("badges").doc(item.id), item);
+    }
+
+    for (const item of visualEchoes) {
+      batchSet(batch, db.collection("visualEchoes").doc(item.id), item);
+    }
+
+    await batch.commit();
 
     return res.status(200).json({
       ok: true,
-      message: "Estrutura do Guardião inicializada no Firebase.",
+      message: "Estrutura do Guardião criada/atualizada no Firebase.",
       summary
     });
   } catch (error) {
