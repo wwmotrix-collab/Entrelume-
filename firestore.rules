@@ -2,13 +2,37 @@ rules_version = '2';
 
 service cloud.firestore {
   match /databases/{database}/documents {
-    match /counters/{counterId} {
+    match /appConfig/{configId} {
       allow read: if true;
-      allow create, update: if request.auth != null;
+      allow write: if false;
     }
 
-    match /users/{userId}/{document=**} {
-      allow read, write: if request.auth != null && request.auth.uid == userId;
+    match /counters/{counterId} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    match /activationCodes/{code} {
+      allow read, write: if false;
+    }
+
+    match /purchases/{purchaseId} {
+      allow read: if request.auth != null && resource.data.uid == request.auth.uid;
+      allow write: if false;
+    }
+
+    match /users/{userId}/app/{docId} {
+      allow read: if request.auth != null && request.auth.uid == userId;
+      allow create, update: if request.auth != null && request.auth.uid == userId
+        && !request.resource.data.diff(resource.data).affectedKeys().hasAny([
+          'activated',
+          'reflection'
+        ]);
+      allow delete: if false;
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
     }
   }
 }
