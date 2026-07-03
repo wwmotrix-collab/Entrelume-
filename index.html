@@ -9,8 +9,6 @@
       :root {
         --bg: #090614;
         --bg-2: #130d25;
-        --card: rgba(255,255,255,.08);
-        --card-strong: rgba(255,255,255,.13);
         --line: rgba(255,255,255,.15);
         --text: #f7f1ff;
         --muted: #b8abc9;
@@ -65,14 +63,7 @@
       .brand h1 { margin: 0; font-size: clamp(22px, 4vw, 36px); letter-spacing: -.05em; line-height: 1; }
       .brand small { display: block; color: var(--muted); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; margin-top: 5px; }
       .tabs { display: flex; padding: 5px; border: 1px solid var(--line); border-radius: 999px; background: rgba(255,255,255,.06); }
-      .tab {
-        border: 0;
-        border-radius: 999px;
-        padding: 10px 16px;
-        background: transparent;
-        color: var(--muted);
-        font-weight: 850;
-      }
+      .tab { border: 0; border-radius: 999px; padding: 10px 16px; background: transparent; color: var(--muted); font-weight: 850; }
       .tab.active { color: #160f03; background: linear-gradient(135deg, var(--gold), #fff0aa); }
       .hero { display: grid; grid-template-columns: 1.12fr .88fr; gap: 20px; margin-top: 18px; }
       .panel, .card, .reader {
@@ -82,44 +73,15 @@
         box-shadow: var(--shadow);
       }
       .panel { padding: clamp(22px, 4vw, 42px); position: relative; overflow: hidden; }
-      .panel::after {
-        content: "";
-        position: absolute;
-        width: 280px;
-        height: 280px;
-        top: -120px;
-        right: -120px;
-        border-radius: 50%;
-        background: radial-gradient(circle, rgba(248,202,101,.28), transparent 70%);
-        pointer-events: none;
-      }
-      .eyebrow {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        padding: 8px 12px;
-        border-radius: 999px;
-        border: 1px solid var(--line);
-        color: var(--gold);
-        background: rgba(248,202,101,.08);
-        font-size: 12px;
-        font-weight: 900;
-        letter-spacing: .12em;
-        text-transform: uppercase;
-      }
+      .panel::after { content: ""; position: absolute; width: 280px; height: 280px; top: -120px; right: -120px; border-radius: 50%; background: radial-gradient(circle, rgba(248,202,101,.28), transparent 70%); pointer-events: none; }
+      .eyebrow { display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 999px; border: 1px solid var(--line); color: var(--gold); background: rgba(248,202,101,.08); font-size: 12px; font-weight: 900; letter-spacing: .12em; text-transform: uppercase; }
       h2 { margin: 0; font-size: clamp(28px, 5vw, 50px); letter-spacing: -.06em; }
       .hero h2 { margin: 20px 0 14px; max-width: 760px; font-size: clamp(42px, 8vw, 88px); line-height: .93; letter-spacing: -.08em; }
       p, .muted { color: var(--muted); line-height: 1.75; }
       .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 22px; }
-      .btn {
-        border: 0;
-        border-radius: 16px;
-        padding: 13px 17px;
-        color: #120d02;
-        background: linear-gradient(135deg, var(--gold), #fff1aa);
-        font-weight: 900;
-      }
+      .btn { border: 0; border-radius: 16px; padding: 13px 17px; color: #120d02; background: linear-gradient(135deg, var(--gold), #fff1aa); font-weight: 900; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; }
       .btn.secondary { color: var(--text); border: 1px solid var(--line); background: rgba(255,255,255,.07); }
+      .btn[disabled] { opacity: .55; cursor: not-allowed; }
       .status-grid, .grid-2, .grid-3 { display: grid; gap: 14px; }
       .status-grid { grid-template-columns: repeat(3, 1fr); margin-top: 24px; }
       .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -129,39 +91,9 @@
       .stat strong { display: block; font-size: 24px; }
       .stat span { color: var(--muted); font-size: 12px; }
       .cover-shell { padding: 20px; display: grid; }
-      .book-cover {
-        min-height: 430px;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-end;
-        padding: 24px;
-        border-radius: 26px;
-        overflow: hidden;
-        border: 1px solid rgba(255,255,255,.2);
-        background:
-          linear-gradient(160deg, rgba(248,202,101,.28), transparent 34%),
-          radial-gradient(circle at 70% 24%, rgba(103,232,249,.22), transparent 26rem),
-          linear-gradient(145deg, #17102d, #080512 64%);
-        position: relative;
-      }
-      .book-cover::before {
-        content: "";
-        position: absolute;
-        inset: 38px;
-        border-radius: 999px 999px 90px 90px;
-        border: 1px solid rgba(248,202,101,.22);
-      }
-      .book-cover::after {
-        content: "ENTRELUME";
-        position: absolute;
-        inset: auto 0 46%;
-        text-align: center;
-        color: rgba(255,255,255,.06);
-        font-size: 46px;
-        font-weight: 950;
-        letter-spacing: .12em;
-        transform: rotate(-8deg);
-      }
+      .book-cover { min-height: 430px; display: flex; flex-direction: column; justify-content: flex-end; padding: 24px; border-radius: 26px; overflow: hidden; border: 1px solid rgba(255,255,255,.2); background: linear-gradient(160deg, rgba(248,202,101,.28), transparent 34%), radial-gradient(circle at 70% 24%, rgba(103,232,249,.22), transparent 26rem), linear-gradient(145deg, #17102d, #080512 64%); position: relative; }
+      .book-cover::before { content: ""; position: absolute; inset: 38px; border-radius: 999px 999px 90px 90px; border: 1px solid rgba(248,202,101,.22); }
+      .book-cover::after { content: "ENTRELUME"; position: absolute; inset: auto 0 46%; text-align: center; color: rgba(255,255,255,.06); font-size: 46px; font-weight: 950; letter-spacing: .12em; transform: rotate(-8deg); }
       .book-cover h3, .book-cover p { position: relative; z-index: 1; }
       .book-cover h3 { margin: 0; font-size: 38px; letter-spacing: -.05em; }
       .section { margin-top: 24px; }
@@ -182,105 +114,61 @@
       .progress span { display: block; height: 100%; width: var(--value, 0%); border-radius: inherit; background: linear-gradient(90deg, var(--violet), var(--cyan), var(--gold)); }
       .store-card { display: grid; grid-template-columns: 180px 1fr; gap: 18px; align-items: center; }
       .mini-cover { aspect-ratio: 3/4; border-radius: 20px; border: 1px solid var(--line); background: radial-gradient(circle at 50% 20%, rgba(248,202,101,.35), transparent 8rem), linear-gradient(150deg, #20143d, #070410); display: grid; place-items: center; color: var(--gold); font-weight: 950; text-align: center; padding: 12px; }
-      input { width: 100%; padding: 14px 16px; border: 1px solid var(--line); border-radius: 16px; background: rgba(0,0,0,.18); color: var(--text); outline: none; }
+      input { width: 100%; padding: 14px 16px; border: 1px solid var(--line); border-radius: 16px; background: rgba(0,0,0,.18); color: var(--text); outline: none; text-transform: uppercase; }
       input:focus { border-color: rgba(248,202,101,.65); }
-      .toast { position: fixed; right: 16px; bottom: 16px; z-index: 99; max-width: 360px; display: none; padding: 14px 16px; border: 1px solid var(--line); border-radius: 18px; background: rgba(15,10,28,.94); box-shadow: var(--shadow); color: var(--text); }
+      .toast { position: fixed; right: 16px; bottom: 16px; z-index: 99; max-width: 390px; display: none; padding: 14px 16px; border: 1px solid var(--line); border-radius: 18px; background: rgba(15,10,28,.94); box-shadow: var(--shadow); color: var(--text); }
       .toast.show { display: block; }
       .voice-dot { width: 10px; height: 10px; display: inline-block; border-radius: 999px; background: var(--muted); margin-right: 6px; }
       .voice-dot.on { background: var(--ok); box-shadow: 0 0 0 5px rgba(121,242,166,.12); }
       [hidden] { display: none !important; }
-      @media (max-width: 860px) {
-        .topbar, .section-head { align-items: stretch; flex-direction: column; }
-        .tabs { width: 100%; }
-        .tab { flex: 1; }
-        .hero, .grid-2, .grid-3, .store-card, .status-grid { grid-template-columns: 1fr; }
-        .book-cover { min-height: 340px; }
-      }
+      @media (max-width: 860px) { .topbar, .section-head { align-items: stretch; flex-direction: column; } .tabs { width: 100%; } .tab { flex: 1; } .hero, .grid-2, .grid-3, .store-card, .status-grid { grid-template-columns: 1fr; } .book-cover { min-height: 340px; } }
     </style>
   </head>
   <body>
     <main class="app">
       <header class="topbar">
-        <div class="brand">
-          <div class="sigil" aria-hidden="true"></div>
-          <div>
-            <h1>Entrelume</h1>
-            <small>Bestseller Épico Reader</small>
-          </div>
-        </div>
-        <nav class="tabs" aria-label="Guias principais">
-          <button class="tab active" data-tab="leitura">Leitura</button>
-          <button class="tab" data-tab="lore">Lore</button>
-          <button class="tab" data-tab="loja">Loja</button>
-        </nav>
+        <div class="brand"><div class="sigil" aria-hidden="true"></div><div><h1>Entrelume</h1><small>Bestseller Épico Reader</small></div></div>
+        <nav class="tabs" aria-label="Guias principais"><button class="tab active" data-tab="leitura">Leitura</button><button class="tab" data-tab="lore">Lore</button><button class="tab" data-tab="loja">Loja</button></nav>
       </header>
 
       <section class="hero">
         <div class="panel">
-          <span class="eyebrow">◈ Primeira Lua aberta</span>
+          <span class="eyebrow">◈ Primeira Lua</span>
           <h2>Leia. Desbloqueie. Colecione o lore.</h2>
-          <p>Três capítulos gratuitos abrem o portal. A compra do livro libera a aba Lore, cria um <strong>Reflexo de Capa</strong> NFT-ready e registra suas insígnias de leitura no Firebase.</p>
-          <div class="actions">
-            <button class="btn" data-scroll="capitulos">Ler capítulos grátis</button>
-            <button class="btn secondary" data-tab-jump="loja">Ir para Loja</button>
-            <button class="btn secondary" id="voiceButton"><span class="voice-dot" id="voiceDot"></span>Comando por voz</button>
-          </div>
-          <div class="status-grid">
-            <div class="stat"><strong id="soldCount">127</strong><span>livros vendidos</span></div>
-            <div class="stat"><strong id="badgeCount">0</strong><span>insígnias</span></div>
-            <div class="stat"><strong id="loreStatus">Bloqueado</strong><span>estado do Lore</span></div>
-          </div>
+          <p>Três capítulos gratuitos abrem o portal. A compra real gera um código único. A ativação libera a aba Lore, cria um <strong>Reflexo de Capa</strong> NFT-ready e registra suas insígnias no Firebase.</p>
+          <div class="actions"><button class="btn" data-scroll="capitulos">Ler capítulos grátis</button><button class="btn secondary" data-tab-jump="loja">Ir para Loja</button><button class="btn secondary" id="voiceButton"><span class="voice-dot" id="voiceDot"></span>Comando por voz</button></div>
+          <div class="status-grid"><div class="stat"><strong id="soldCount">—</strong><span>livros vendidos</span></div><div class="stat"><strong id="badgeCount">0</strong><span>insígnias</span></div><div class="stat"><strong id="loreStatus">Bloqueado</strong><span>estado do Lore</span></div></div>
         </div>
-        <aside class="panel cover-shell">
-          <div class="book-cover">
-            <h3>Bestseller Épico</h3>
-            <p>Livro I — Origem da Humanidade</p>
-          </div>
-        </aside>
+        <aside class="panel cover-shell"><div class="book-cover"><h3>Bestseller Épico</h3><p>Livro I — Origem da Humanidade</p></div></aside>
       </section>
 
       <section class="section" id="tab-leitura">
-        <div class="section-head">
-          <div><span class="eyebrow">Leitura inicial</span><h2 id="capitulos">3 capítulos disponíveis</h2></div>
-          <button class="btn secondary" id="markReadButton">Marcar leitura concluída</button>
-        </div>
-        <article class="reader">
-          <div class="chapter-list">
-            <section class="chapter"><h3>Capítulo 1 — O Primeiro Diapasão</h3><p>Antes da máquina tocar o céu, a civilização original já escutava o planeta como corpo vivo. Suas cidades respiravam em fungos, corais e memória RNA, até que um objeto não nascido da Terra atravessou o silêncio e feriu o sangue do mundo.</p></section>
-            <section class="chapter"><h3>Capítulo 2 — Fragmentos Mecânicos</h3><p>Os primeiros drones caíram como aranhas de prata. A humanidade não os venerou: estudou, desmontou, assimilou. O que era invasão tornou-se ferramenta, e o conflito entre tradição e avanço passou a ter uma única resposta: defender a divindade viva também era ciência.</p></section>
-            <section class="chapter"><h3>Capítulo 3 — Quando Aprendemos a Máquina</h3><p>A segunda onda chegou esperando encontrar organismos indefesos. Encontrou uma civilização que havia aprendido a falar com metal sem abandonar o sangue da Terra. Ao final do terceiro capítulo, uma pergunta fica aberta: o que a nave-mãe fará quando perceber que a força não basta?</p></section>
-            <section class="chapter locked" id="chapterLocked"><h3>Livro completo bloqueado</h3><p>Continue no livro completo para liberar a Primeira Lua do Lore, receber seu Reflexo de Capa e abrir os primeiros fragmentos do Conselho Entrelume.</p><div class="actions"><button class="btn" data-tab-jump="loja">Comprar ou ativar livro</button></div></section>
-          </div>
-        </article>
+        <div class="section-head"><div><span class="eyebrow">Leitura inicial</span><h2 id="capitulos">3 capítulos disponíveis</h2></div><button class="btn secondary" id="markReadButton">Marcar leitura concluída</button></div>
+        <article class="reader"><div class="chapter-list">
+          <section class="chapter"><h3>Capítulo 1 — O Primeiro Diapasão</h3><p>Antes da máquina tocar o céu, a civilização original já escutava o planeta como corpo vivo. Suas cidades respiravam em fungos, corais e memória RNA, até que um objeto não nascido da Terra atravessou o silêncio e feriu o sangue do mundo.</p></section>
+          <section class="chapter"><h3>Capítulo 2 — Fragmentos Mecânicos</h3><p>Os primeiros drones caíram como aranhas de prata. A humanidade não os venerou: estudou, desmontou, assimilou. O que era invasão tornou-se ferramenta, e o conflito entre tradição e avanço passou a ter uma única resposta: defender a divindade viva também era ciência.</p></section>
+          <section class="chapter"><h3>Capítulo 3 — Quando Aprendemos a Máquina</h3><p>A segunda onda chegou esperando encontrar organismos indefesos. Encontrou uma civilização que havia aprendido a falar com metal sem abandonar o sangue da Terra. Ao final do terceiro capítulo, uma pergunta fica aberta: o que a nave-mãe fará quando perceber que a força não basta?</p></section>
+          <section class="chapter locked" id="chapterLocked"><h3>Livro completo bloqueado</h3><p>Continue no livro completo para liberar a Primeira Lua do Lore, receber seu Reflexo de Capa e abrir os primeiros fragmentos do Conselho Entrelume.</p><div class="actions"><button class="btn" data-tab-jump="loja">Comprar ou ativar livro</button></div></section>
+        </div></article>
       </section>
 
       <section class="section" id="tab-lore" hidden>
-        <div class="section-head">
-          <div><span class="eyebrow">Guardião do Lore</span><h2>Lore desbloqueável</h2></div>
-          <span class="tag warn" id="loreTag">Autorização lunar pendente</span>
-        </div>
+        <div class="section-head"><div><span class="eyebrow">Guardião do Lore</span><h2>Lore desbloqueável</h2></div><span class="tag warn" id="loreTag">Autorização lunar pendente</span></div>
         <div class="grid-2">
-          <article class="card locked" id="loreGateCard"><h3>Portal da Primeira Lua</h3><p class="muted" id="loreGateText">Escaneie ou digite o QR/código único do livro para liberar fragmentos, insígnias e portais narrativos.</p><div class="actions"><button class="btn" data-tab-jump="loja">Ativar código</button></div></article>
+          <article class="card locked" id="loreGateCard"><h3>Portal da Primeira Lua</h3><p class="muted" id="loreGateText">Digite o código único do livro para liberar fragmentos, insígnias e portais narrativos.</p><div class="actions"><button class="btn" data-tab-jump="loja">Ativar código</button></div></article>
           <article class="card"><h3>Guardião responde</h3><p class="muted" id="guardianAnswer">“Autorização lunar insuficiente para acessar este fragmento.”</p><div class="actions"><button class="btn secondary" id="askGuardianButton">Perguntar ao Guardião</button></div></article>
         </div>
         <div class="section"><div class="grid-3" id="loreFragments"></div></div>
         <div class="section"><div class="section-head"><h2>Insígnias</h2><span class="muted">Guardadas na conta do leitor</span></div><div class="grid-3" id="badgesGrid"></div></div>
-        <div class="section"><div class="section-head"><h2>Reflexo de Capa</h2><span class="muted">NFT-ready, sem exigir carteira no MVP</span></div><article class="card locked" id="reflectionCard"><h3>Nenhum Reflexo ativo</h3><p class="muted">Compre ou ative o livro para gerar seu Reflexo de Capa interno.</p></article></div>
+        <div class="section"><div class="section-head"><h2>Reflexo de Capa</h2><span class="muted">NFT-ready, sem exigir carteira no MVP</span></div><article class="card locked" id="reflectionCard"><h3>Nenhum Reflexo ativo</h3><p class="muted">Ative um código real do livro para gerar seu Reflexo de Capa interno.</p></article></div>
       </section>
 
       <section class="section" id="tab-loja" hidden>
         <div class="section-head"><div><span class="eyebrow">Loja Entrelume</span><h2>Livro, meta e ativação</h2></div></div>
-        <article class="card store-card">
-          <div class="mini-cover">BESTSELLER<br />ÉPICO<br />LIVRO I</div>
-          <div>
-            <h3>Bestseller Épico — Livro I</h3>
-            <p class="muted">Compra simulada para MVP. Ao confirmar, o app grava no Firebase, gera código único, libera Lore, cria Reflexo de Capa e atualiza contador.</p>
-            <div class="actions"><button class="btn" id="buyButton">Simular compra</button><button class="btn secondary" id="copyCodeButton">Copiar código demo</button></div>
-          </div>
-        </article>
+        <article class="card store-card"><div class="mini-cover">BESTSELLER<br />ÉPICO<br />LIVRO I</div><div><h3>Bestseller Épico — Livro I</h3><p class="muted">Compra real: configure o link de pagamento em <strong>appConfig/store.purchaseUrl</strong>. Após a compra, o leitor recebe um código único cadastrado em <strong>activationCodes</strong>.</p><div class="actions"><button class="btn" id="buyButton">Comprar livro</button></div></div></article>
         <div class="grid-2 section">
-          <article class="card"><h3>Ativar QR / código único</h3><p class="muted">Use o código demo <strong>ENTRELUME-001</strong> para liberar o Lore nesta versão inicial.</p><input id="activationInput" placeholder="Digite o código do QR" autocomplete="off" /><div class="actions"><button class="btn" id="activateButton">Ativar livro</button></div></article>
-          <article class="card"><h3>Próximo lançamento</h3><p class="muted">Meta coletiva para liberar o próximo evento narrativo.</p><div class="progress"><span id="launchProgress"></span></div><p class="muted"><strong id="launchPercent">42%</strong> da meta da Segunda Lua.</p></article>
+          <article class="card"><h3>Ativar QR / código único</h3><p class="muted">Digite o código único recebido após a compra. Sem código de demonstração.</p><input id="activationInput" placeholder="Digite o código do QR" autocomplete="off" /><div class="actions"><button class="btn" id="activateButton">Ativar livro</button></div></article>
+          <article class="card"><h3>Próximo lançamento</h3><p class="muted">Meta coletiva calculada pelo contador real de vendas.</p><div class="progress"><span id="launchProgress"></span></div><p class="muted"><strong id="launchPercent">—</strong> da meta da Segunda Lua.</p></article>
         </div>
       </section>
     </main>
@@ -290,7 +178,7 @@
     <script type="module">
       import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
       import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
-      import { getFirestore, doc, getDoc, setDoc, runTransaction, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+      import { getFirestore, doc, getDoc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
 
       const firebaseConfig = {
         apiKey: "AIzaSyBJOC6RXSQ7Lk0ohjmp3HCVxgnX8nI-yvE",
@@ -305,52 +193,31 @@
       const auth = getAuth(app);
       const db = getFirestore(app);
 
-      const DEMO_CODE = "ENTRELUME-001";
-      const BASE_SOLD = 127;
-      const GOAL = 300;
+      const FALLBACK_GOAL = 300;
       let uid = null;
-      let firebaseReady = false;
+      let purchaseUrl = "";
 
+      const state = loadLocalState();
       const defaultBadges = [
         { id: "first-page", title: "Primeira Página", text: "Você abriu o primeiro portal de leitura." },
         { id: "witness", title: "Testemunha do Despertar", text: "Você concluiu os três capítulos gratuitos." },
         { id: "cover-reflection", title: "Portador do Reflexo", text: "Você ativou um Reflexo de Capa." }
       ];
-
       const loreFragments = [
         { title: "Fragmento RNA", text: "Memórias vivas preservadas em estruturas orgânicas." },
         { title: "A Água como Sangue", text: "Primeiro registro teológico-científico da divindade Terra." },
         { title: "Nave Key", text: "Sinal antigo aguardando autorização lunar." }
       ];
 
-      const state = loadLocalState();
-
       function loadLocalState() {
         const saved = localStorage.getItem("entrelume-state");
         if (saved) return JSON.parse(saved);
-        return { activeTab: "leitura", activated: false, readCompleted: false, badges: ["first-page"], reflection: null, soldCount: BASE_SOLD, launchGoal: GOAL };
+        return { activeTab: "leitura", activated: false, readCompleted: false, badges: ["first-page"], reflection: null, soldCount: 0, launchGoal: FALLBACK_GOAL };
       }
-
-      function saveLocalState() {
-        localStorage.setItem("entrelume-state", JSON.stringify(state));
-      }
-
-      async function saveRemoteState() {
-        saveLocalState();
-        if (!firebaseReady || !uid) return;
-        try {
-          await setDoc(doc(db, "users", uid, "app", "state"), {
-            activated: state.activated,
-            readCompleted: state.readCompleted,
-            badges: state.badges,
-            reflection: state.reflection,
-            updatedAt: serverTimestamp()
-          }, { merge: true });
-        } catch (error) {
-          console.warn("Falha ao salvar estado remoto", error);
-          showToast("Estado salvo localmente. Verifique Auth/Firestore Rules para salvar no Firebase.");
-        }
-      }
+      function saveLocalState() { localStorage.setItem("entrelume-state", JSON.stringify(state)); }
+      function showToast(message) { const toast = document.getElementById("toast"); toast.textContent = message; toast.classList.add("show"); setTimeout(() => toast.classList.remove("show"), 3600); }
+      function setTab(tabName) { state.activeTab = tabName; document.querySelectorAll(".tab").forEach((button) => button.classList.toggle("active", button.dataset.tab === tabName)); ["leitura", "lore", "loja"].forEach((tab) => document.getElementById(`tab-${tab}`).hidden = tab !== tabName); saveLocalState(); }
+      function addBadge(id) { if (!state.badges.includes(id)) state.badges.push(id); }
 
       async function bootFirebase() {
         try {
@@ -358,32 +225,30 @@
           onAuthStateChanged(auth, async (user) => {
             if (!user) return;
             uid = user.uid;
-            firebaseReady = true;
             await hydrateFromFirebase();
-            showToast("Firebase conectado. Leitura e Lore sincronizados.");
+            showToast("Firebase conectado. Fluxo real de ativação pronto.");
           });
         } catch (error) {
-          console.warn("Firebase Auth indisponível", error);
-          showToast("Firebase ainda não autenticou. Ative Anonymous Auth no console.");
+          console.error(error);
+          showToast("Falha no login anônimo. Verifique Authentication > Anonymous.");
           render();
         }
       }
 
       async function hydrateFromFirebase() {
         try {
-          const counterRef = doc(db, "counters", "sales");
-          const counterSnap = await getDoc(counterRef);
-          if (!counterSnap.exists()) {
-            await setDoc(counterRef, { soldCount: BASE_SOLD, launchGoal: GOAL, updatedAt: serverTimestamp() });
-            state.soldCount = BASE_SOLD;
-            state.launchGoal = GOAL;
-          } else {
+          const [counterSnap, userSnap, storeSnap] = await Promise.all([
+            getDoc(doc(db, "counters", "sales")),
+            getDoc(doc(db, "users", uid, "app", "state")),
+            getDoc(doc(db, "appConfig", "store"))
+          ]);
+
+          if (counterSnap.exists()) {
             const data = counterSnap.data();
-            state.soldCount = data.soldCount ?? BASE_SOLD;
-            state.launchGoal = data.launchGoal ?? GOAL;
+            state.soldCount = data.soldCount ?? 0;
+            state.launchGoal = data.launchGoal ?? FALLBACK_GOAL;
           }
 
-          const userSnap = await getDoc(doc(db, "users", uid, "app", "state"));
           if (userSnap.exists()) {
             const data = userSnap.data();
             state.activated = Boolean(data.activated);
@@ -391,116 +256,84 @@
             state.badges = Array.isArray(data.badges) && data.badges.length ? data.badges : state.badges;
             state.reflection = data.reflection || state.reflection;
           }
+
+          if (storeSnap.exists()) purchaseUrl = storeSnap.data().purchaseUrl || "";
           saveLocalState();
           render();
         } catch (error) {
-          console.warn("Falha ao carregar Firebase", error);
+          console.error(error);
+          showToast("Firestore não carregou. Confira as regras e coleções iniciais.");
           render();
         }
       }
 
-      function showToast(message) {
-        const toast = document.getElementById("toast");
-        toast.textContent = message;
-        toast.classList.add("show");
-        setTimeout(() => toast.classList.remove("show"), 3400);
-      }
-
-      function setTab(tabName) {
-        state.activeTab = tabName;
-        document.querySelectorAll(".tab").forEach((button) => button.classList.toggle("active", button.dataset.tab === tabName));
-        ["leitura", "lore", "loja"].forEach((tab) => document.getElementById(`tab-${tab}`).hidden = tab !== tabName);
+      async function saveReadingState() {
         saveLocalState();
+        if (!uid) return;
+        await setDoc(doc(db, "users", uid, "app", "state"), {
+          readCompleted: state.readCompleted,
+          badges: state.badges,
+          updatedAt: serverTimestamp()
+        }, { merge: true });
       }
 
-      function addBadge(id) {
-        if (!state.badges.includes(id)) state.badges.push(id);
-      }
+      async function redeemCode() {
+        const input = document.getElementById("activationInput");
+        const code = input.value.trim().toUpperCase();
+        if (!code) return showToast("Digite um código real de ativação.");
+        if (!auth.currentUser) return showToast("Aguarde o login anônimo conectar.");
 
-      function generateReflection() {
-        if (state.reflection) return;
-        const serial = String((state.soldCount || BASE_SOLD) + 1).padStart(6, "0");
-        state.reflection = {
-          id: `cover-reflection-${serial}`,
-          bookId: "bestseller-epico-livro-1",
-          edition: "Primeira Lua",
-          language: "pt-BR",
-          serialNumber: serial,
-          mintStatus: "not_minted",
-          walletAddress: null,
-          tokenId: null,
-          contractAddress: null,
-          metadataUri: null,
-          createdAt: new Date().toISOString()
-        };
-      }
+        document.getElementById("activateButton").disabled = true;
+        try {
+          const token = await auth.currentUser.getIdToken();
+          const response = await fetch("/api/redeem", {
+            method: "POST",
+            headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
+            body: JSON.stringify({ code })
+          });
+          const data = await response.json();
+          if (!response.ok) throw new Error(data.error || "Falha ao ativar código.");
 
-      async function incrementRemoteCounterOnce() {
-        if (!firebaseReady || !uid) {
-          state.soldCount = (state.soldCount || BASE_SOLD) + 1;
-          return;
-        }
-
-        const userRef = doc(db, "users", uid, "app", "state");
-        const counterRef = doc(db, "counters", "sales");
-        await runTransaction(db, async (transaction) => {
-          const userSnap = await transaction.get(userRef);
-          const counterSnap = await transaction.get(counterRef);
-          const wasActivated = userSnap.exists() && userSnap.data().activated;
-          const currentSold = counterSnap.exists() ? (counterSnap.data().soldCount || BASE_SOLD) : BASE_SOLD;
-
-          if (!counterSnap.exists()) {
-            transaction.set(counterRef, { soldCount: BASE_SOLD, launchGoal: GOAL, updatedAt: serverTimestamp() });
-          }
-
-          if (!wasActivated) {
-            state.soldCount = currentSold + 1;
-            transaction.set(counterRef, { soldCount: currentSold + 1, launchGoal: GOAL, updatedAt: serverTimestamp() }, { merge: true });
-          } else {
-            state.soldCount = currentSold;
-          }
-        });
-      }
-
-      async function activateBook(source = "código") {
-        if (!state.activated) {
-          try {
-            await incrementRemoteCounterOnce();
-          } catch (error) {
-            console.warn("Falha ao incrementar contador remoto", error);
-            state.soldCount = (state.soldCount || BASE_SOLD) + 1;
-          }
           state.activated = true;
-          generateReflection();
+          state.reflection = data.reflection;
+          state.soldCount = data.soldCount ?? state.soldCount;
           addBadge("cover-reflection");
-          await saveRemoteState();
-          showToast(`Livro ativado por ${source}. Lore liberado e Reflexo de Capa criado.`);
-        } else {
-          showToast("Livro já está ativado nesta conta demo.");
+          saveLocalState();
+          await hydrateFromFirebase();
+          render();
+          setTab("lore");
+          showToast("Livro ativado. Lore liberado e Reflexo de Capa criado.");
+        } catch (error) {
+          console.error(error);
+          showToast(error.message);
+        } finally {
+          document.getElementById("activateButton").disabled = false;
         }
-        render();
-        setTab("lore");
       }
 
       async function markReadCompleted() {
         state.readCompleted = true;
         addBadge("witness");
-        await saveRemoteState();
+        await saveReadingState();
         render();
-        showToast("Leitura gratuita concluída. Insígnia liberada.");
+        showToast("Leitura concluída. Insígnia liberada.");
+      }
+
+      function openPurchase() {
+        if (purchaseUrl) window.open(purchaseUrl, "_blank", "noopener,noreferrer");
+        else showToast("Configure appConfig/store.purchaseUrl no Firestore com o link real de pagamento.");
       }
 
       function renderStats() {
-        const sold = state.soldCount || BASE_SOLD;
-        const goal = state.launchGoal || GOAL;
-        const percent = Math.min(100, Math.round((sold / goal) * 100));
+        const sold = state.soldCount || 0;
+        const goal = state.launchGoal || FALLBACK_GOAL;
+        const percent = goal ? Math.min(100, Math.round((sold / goal) * 100)) : 0;
         document.getElementById("soldCount").textContent = sold;
         document.getElementById("badgeCount").textContent = state.badges.length;
         document.getElementById("loreStatus").textContent = state.activated ? "Liberado" : "Bloqueado";
         document.getElementById("launchProgress").style.setProperty("--value", `${percent}%`);
         document.getElementById("launchPercent").textContent = `${percent}%`;
       }
-
       function renderLore() {
         const loreTag = document.getElementById("loreTag");
         const loreGateCard = document.getElementById("loreGateCard");
@@ -508,77 +341,38 @@
         loreTag.textContent = state.activated ? "Primeira Lua autorizada" : "Autorização lunar pendente";
         loreTag.className = `tag ${state.activated ? "ok" : "warn"}`;
         loreGateCard.className = `card ${state.activated ? "unlocked" : "locked"}`;
-        loreGateText.textContent = state.activated ? "A Primeira Lua foi aberta. Os primeiros fragmentos estão disponíveis conforme seu progresso de leitura." : "Escaneie ou digite o QR/código único do livro para liberar fragmentos, insígnias e portais narrativos.";
-
-        document.getElementById("loreFragments").innerHTML = loreFragments.map((fragment, index) => {
-          const available = state.activated && (index === 0 || state.readCompleted);
-          return `<article class="card ${available ? "unlocked" : "locked"}"><span class="tag ${available ? "ok" : "warn"}">${available ? "Aberto" : "Bloqueado"}</span><h3>${fragment.title}</h3><p class="muted">${available ? fragment.text : "Este eco ainda não foi despertado pela sua leitura."}</p></article>`;
-        }).join("");
+        loreGateText.textContent = state.activated ? "A Primeira Lua foi aberta. Os primeiros fragmentos estão disponíveis conforme seu progresso de leitura." : "Digite o código único do livro para liberar fragmentos, insígnias e portais narrativos.";
+        document.getElementById("loreFragments").innerHTML = loreFragments.map((fragment, index) => { const available = state.activated && (index === 0 || state.readCompleted); return `<article class="card ${available ? "unlocked" : "locked"}"><span class="tag ${available ? "ok" : "warn"}">${available ? "Aberto" : "Bloqueado"}</span><h3>${fragment.title}</h3><p class="muted">${available ? fragment.text : "Este eco ainda não foi despertado pela sua leitura."}</p></article>`; }).join("");
       }
-
-      function renderBadges() {
-        document.getElementById("badgesGrid").innerHTML = defaultBadges.map((badge) => {
-          const earned = state.badges.includes(badge.id);
-          return `<article class="card ${earned ? "unlocked" : "locked"}"><span class="tag ${earned ? "ok" : "warn"}">${earned ? "Conquistada" : "Pendente"}</span><h3>${badge.title}</h3><p class="muted">${badge.text}</p></article>`;
-        }).join("");
-      }
-
+      function renderBadges() { document.getElementById("badgesGrid").innerHTML = defaultBadges.map((badge) => { const earned = state.badges.includes(badge.id); return `<article class="card ${earned ? "unlocked" : "locked"}"><span class="tag ${earned ? "ok" : "warn"}">${earned ? "Conquistada" : "Pendente"}</span><h3>${badge.title}</h3><p class="muted">${badge.text}</p></article>`; }).join(""); }
       function renderReflection() {
         const card = document.getElementById("reflectionCard");
-        if (!state.reflection) {
-          card.className = "card locked";
-          card.innerHTML = `<h3>Nenhum Reflexo ativo</h3><p class="muted">Compre ou ative o livro para gerar seu Reflexo de Capa interno.</p>`;
-          return;
-        }
+        if (!state.reflection) { card.className = "card locked"; card.innerHTML = `<h3>Nenhum Reflexo ativo</h3><p class="muted">Ative um código real do livro para gerar seu Reflexo de Capa interno.</p>`; return; }
         const reflection = state.reflection;
         card.className = "card unlocked";
         card.innerHTML = `<span class="tag ok">NFT-ready</span><h3>Reflexo de Capa Nº ${reflection.serialNumber}</h3><p class="muted">Livro: ${reflection.bookId}</p><p class="muted">Edição: ${reflection.edition} • Idioma: ${reflection.language}</p><p class="muted">Status de cunhagem futura: <strong>${reflection.mintStatus}</strong></p>`;
       }
-
       function renderGuardian() {
         const answer = document.getElementById("guardianAnswer");
         if (!state.activated) answer.textContent = "“Autorização lunar insuficiente para acessar este fragmento.”";
         else if (!state.readCompleted) answer.textContent = "“A Primeira Lua reconhece seu Reflexo. Conclua os três capítulos para despertar o próximo eco.”";
         else answer.textContent = "“Fragmento RNA aberto. A memória não revela tudo: ela apenas ensina onde procurar.”";
       }
-
-      function render() {
-        renderStats();
-        renderLore();
-        renderBadges();
-        renderReflection();
-        renderGuardian();
-        document.getElementById("chapterLocked").className = `chapter ${state.activated ? "unlocked" : "locked"}`;
-      }
+      function render() { renderStats(); renderLore(); renderBadges(); renderReflection(); renderGuardian(); document.getElementById("chapterLocked").className = `chapter ${state.activated ? "unlocked" : "locked"}`; }
 
       document.querySelectorAll(".tab").forEach((button) => button.addEventListener("click", () => setTab(button.dataset.tab)));
       document.querySelectorAll("[data-tab-jump]").forEach((button) => button.addEventListener("click", () => setTab(button.dataset.tabJump)));
       document.querySelectorAll("[data-scroll]").forEach((button) => button.addEventListener("click", () => document.getElementById(button.dataset.scroll).scrollIntoView()));
       document.getElementById("markReadButton").addEventListener("click", markReadCompleted);
-      document.getElementById("buyButton").addEventListener("click", () => activateBook("compra simulada"));
-      document.getElementById("activateButton").addEventListener("click", () => {
-        const value = document.getElementById("activationInput").value.trim().toUpperCase();
-        if (value === DEMO_CODE) activateBook("QR/código");
-        else showToast("Código inválido. Use ENTRELUME-001 nesta demo.");
-      });
-      document.getElementById("copyCodeButton").addEventListener("click", async () => {
-        await navigator.clipboard?.writeText(DEMO_CODE);
-        document.getElementById("activationInput").value = DEMO_CODE;
-        showToast("Código demo copiado para ativação.");
-      });
-      document.getElementById("askGuardianButton").addEventListener("click", () => {
-        renderGuardian();
-        showToast("Guardião consultado conforme seu nível de leitura.");
-      });
+      document.getElementById("buyButton").addEventListener("click", openPurchase);
+      document.getElementById("activateButton").addEventListener("click", redeemCode);
+      document.getElementById("askGuardianButton").addEventListener("click", () => { renderGuardian(); showToast("Guardião consultado conforme seu nível de leitura."); });
 
       function setupVoice() {
         const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
         const button = document.getElementById("voiceButton");
         const dot = document.getElementById("voiceDot");
-        if (!SpeechRecognition) {
-          button.addEventListener("click", () => showToast("Comando por voz não suportado neste navegador."));
-          return;
-        }
+        if (!SpeechRecognition) { button.addEventListener("click", () => showToast("Comando por voz não suportado neste navegador.")); return; }
         const recognition = new SpeechRecognition();
         recognition.lang = "pt-BR";
         recognition.continuous = true;
@@ -594,12 +388,7 @@
           if (transcript.includes("comprar")) setTab("loja");
         });
         recognition.addEventListener("end", () => { if (active) recognition.start(); });
-        button.addEventListener("click", () => {
-          active = !active;
-          dot.classList.toggle("on", active);
-          if (active) { recognition.start(); showToast("Comandos ativos: sobe, desce, lore, loja, leitura."); }
-          else { recognition.stop(); showToast("Comando por voz pausado."); }
-        });
+        button.addEventListener("click", () => { active = !active; dot.classList.toggle("on", active); if (active) { recognition.start(); showToast("Comandos ativos: sobe, desce, lore, loja, leitura."); } else { recognition.stop(); showToast("Comando por voz pausado."); } });
       }
 
       setupVoice();
